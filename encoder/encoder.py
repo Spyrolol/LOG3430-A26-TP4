@@ -77,10 +77,10 @@ def exec_convert(input_file, output_file, from_encoding: str, to_encoding: str) 
                               check=True)
     else:
         return subprocess.run(['iconv',
-                               '--f', from_encoding,
-                               '--t', to_encoding,
+                               '-f', from_encoding,
+                               '-t', to_encoding,
                                input_file,
-                               '--o', output_file], check=True)
+                               '-o', output_file], check=True)
 
 
 def convert(input_file, output_file, from_encoding, to_encoding):
