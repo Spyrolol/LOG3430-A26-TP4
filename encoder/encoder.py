@@ -76,11 +76,12 @@ def exec_convert(input_file, output_file, from_encoding: str, to_encoding: str) 
                                f'Get-Content "{input_file}" -Encoding {from_encoding} | Set-Content "{output_file}" -Encoding {to_encoding}'],
                               check=True)
     else:
-        return subprocess.run(['iconv',
-                               '-f', from_encoding,
-                               '-t', to_encoding,
-                               input_file,
-                               '-o', output_file], check=True)
+        with open(output_file, 'wb') as out:
+            return subprocess.run(
+                ['iconv', '-f', from_encoding, '-t', to_encoding, input_file],
+                stdout=out,
+                check=True
+            )
 
 
 def convert(input_file, output_file, from_encoding, to_encoding):
